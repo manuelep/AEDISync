@@ -23,8 +23,8 @@ def _get_dest_parts2(archname=None):
     out = {"path": "", "tmp_path": "/tmp"}
 
 #     dest = current.appconf.get("dest", {}).get("dest")
-    dest = current.myconf.take("dest")
-#   out.update(current.appconf[dest])
+    dest = current.myconf.take("dest.dest")
+
     out.update(current.myconf.take(dest))
     if not "protocol" in out:
         out["protocol"] = dest.split("_")[0]
