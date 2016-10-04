@@ -23,12 +23,11 @@ def _get_dest_parts2(archname=None):
     out = {"path": "", "tmp_path": "/tmp"}
 
 #     dest = current.appconf.get("dest", {}).get("dest")
-    dest = current.myconf.take("dest", default={}).get("dest")
-    if not dest is None:
-#         out.update(current.appconf[dest])
-        out.update(current.myconf.take(dest))
-        if not "protocol" in out:
-            out["protocol"] = dest.split("_")[0]
+    dest = current.myconf.take("dest")
+#   out.update(current.appconf[dest])
+    out.update(current.myconf.take(dest))
+    if not "protocol" in out:
+        out["protocol"] = dest.split("_")[0]
 
     out.update({k: v for k,v in current.myconf.get("dest", {}).iteritems() if k!="dest"})
     prefix = "dest_"

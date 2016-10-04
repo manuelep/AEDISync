@@ -36,7 +36,7 @@ def dbsync(waits=0, force=False):
         else:
             # se ultima modifica è troppo vecchia
             delta = (now-fres[last_update])
-            return delta.total_seconds()>=appconf[archname]["period"]
+            return delta.total_seconds()>=myconf.take("%s.period" % archname, cast=int)
 
     # downloadable archives
     archives = dict([(k,v) for k,v in myconf.iteritems() \
@@ -77,7 +77,7 @@ class sync(object):
         # Elaborazione congiunta degli archivi di catalogo, prezzi e disponibilità
         # per preparazione file dei prodotti (completo ed eventualmente quello parziale)
         if any([i in res["fetched_archives"] for i in mainarch]):
-            if archive.build_updates(updated=res["fetched_archives"].keys(), clean=not current.development)>0:
+            if archive.build_updates(clean=not current.development)>0:
                 out.update(archive.compile_csv())
 
         # Elaborazioni singole (solo per archivi di immagini)
