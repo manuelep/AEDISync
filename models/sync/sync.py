@@ -97,5 +97,6 @@ class sync(object):
             logger.warning("Temporary folder found not empty!")
             shutil.rmtree(appconf.dest.tmp_path)
             logger.warning("Temporary folder cleaned.")
-#         if len(cls._go())>0:
+        if len(cls._go())>0:
+            pass
 #             rsync()
