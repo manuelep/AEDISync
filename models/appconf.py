@@ -9,7 +9,8 @@ from appconf.log import get_configured_logger
 
 try:
     current.development
-except AttributeError:
+except NameError:
+    from gluon import current
     from gluon.contrib.appconfig import AppConfig
     myconf = AppConfig(reload=False)
     current.development = False
