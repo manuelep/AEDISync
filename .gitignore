@@ -70,8 +70,5 @@ uploads/*
 
 # This app
 models/_.py
-static/*
-views/*
-languages/*
 cron/*
 
