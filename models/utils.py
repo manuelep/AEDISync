@@ -13,6 +13,9 @@ def not_equal(a, b):
     else:
         return False
 
+def equal(a, b):
+    return not not_equal(a, b)
+
 class archive(object):
     """ Tools to manage archive data """
 
@@ -227,3 +230,9 @@ class archive(object):
                         updw.writerow(rowdict)
 
         return out
+
+def keep_cleaned(f):
+    row = db(db.product_catalog.id>0).select(db.product_catalog.pdata, orderby=~db.product_catalog.id, limitby=(0,1,))
+    return equal(f["pdata"], row.pdata)
+
+db.product_catalog._before_insert.append(keep_cleaned)
